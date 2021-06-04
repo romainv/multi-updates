@@ -1,9 +1,10 @@
-const { join } = require("path")
+const { join, dirname } = require("path")
 const { exec } = require("child_process")
 const hasDependency = require("./hasDependency")
 // Location of the updates binary. We won't be able to use 'npx updates' as
 // we'll run this in various packages which may not have this dependency
-const updatesBin = join(__dirname, "..", "node_modules", ".bin", "updates")
+const updatesPkg = require.resolve("updates/package.json")
+const updatesBin = join(dirname(updatesPkg), require(updatesPkg).bin)
 
 /**
  * Execute the updates command in the supplied directory and return the

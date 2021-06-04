@@ -1,6 +1,6 @@
 {
   "name": "multi-updates",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Update npm dependencies across all packages in a monorepo, with support for version constraints",
   "main": "src/index.js",
   "author": "Romain Vermeulen",
@@ -38,6 +38,7 @@
   "dependencies": {
     "ansi-colors": "^4.1.1",
     "enquirer": "^2.3.6",
+    "find-up": "^5.0.0",
     "glob": "^7.1.7",
     "updates": "^12.1.0",
     "yargs": "^17.0.1"
