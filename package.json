@@ -1,6 +1,6 @@
 {
   "name": "multi-updates",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Update npm dependencies across all packages in a monorepo, with support for version constraints",
   "main": "src/index.js",
   "author": "Romain Vermeulen",
@@ -33,7 +33,6 @@
     "multi-updates": "multi-updates"
   },
   "scripts": {
-    "test": "jest",
     "lint": "eslint --cache --fix && prettier --write"
   },
   "dependencies": {
@@ -48,7 +47,6 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^3.4.0",
-    "jest": "^27.0.4",
     "prettier": "^2.3.0"
   },
   "prettier": {
@@ -62,8 +60,7 @@
     "env": {
       "node": true,
       "es2017": true,
-      "browser": true,
-      "jest": true
+      "browser": true
     },
     "extends": [
       "eslint:recommended",
