@@ -1,0 +1,54 @@
+#!/usr/bin/env node
+
+// eslint-disable-next-line node/no-extraneous-require
+const findUp = require("find-up") // Dependency of yargs
+const { join } = require("path")
+const Module = require("module")
+const update = require("./src")
+
+// Capture process arguments
+const cliArgs = process.argv.slice(2)
+
+// Retrieve user-defined configuration, which can be in the following
+// locations:
+// 	- the path to the config file passed by the --config argument
+// 	- multi-updates.config.js file up in the tree from the current working
+// 		directory
+// 	- multi-updates.config.json file up in the tree from the current working
+// 		directory
+// 	- 'multiUpdates' entry in the package.json of the current npm package
+const userConf = {}
+const userConfPath = cliArgs.includes("--config")
+  ? // If a specific configuration was passed, resolve its path from the
+    // current working directory instead of from this file
+    require.resolve(cliArgs[cliArgs.indexOf("--config") + 1], {
+      paths: Module._nodeModulePaths(process.cwd()).concat([process.cwd()]),
+    })
+  : findUp.sync((dir) =>
+      findUp.sync.exists(join(dir, "multi-updates.config.js"))
+        ? // First multi-updates.config.js if found
+          join(dir, "multi-updates.config.js")
+        : findUp.sync.exists(join(dir, "multi-updates.config.json"))
+        ? // First multi-updates.config.json if found
+          join(dir, "multi-updates.config.json")
+        : // First package.json file with a 'multiUpdates' entry, if found
+        findUp.sync.exists(join(dir, "package.json")) &&
+          require(join(dir, "package.json")).multiUpdates
+        ? join(dir, "package.json")
+        : // Continue the search upward otherwise
+          undefined
+    )
+if (userConfPath) {
+  // If a user config file was found
+  if (userConfPath.endsWith("package.json"))
+    Object.assign(userConf, require(userConfPath).multiUpdates)
+  else Object.assign(userConf, require(userConfPath))
+}
+
+// Define and retrieve CLI arguments and commands
+require("yargs")
+  .config(userConf) // Provide user conf from the default location
+  .config() // Load other config file if provide with --config
+  .command("$0", "Update dependencies in all packages", {}, (args) =>
+    update(args)
+  ).argv

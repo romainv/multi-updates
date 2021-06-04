@@ -1,0 +1,86 @@
+{
+  "name": "multi-updates",
+  "version": "0.1.0",
+  "description": "Update npm dependencies across all packages in a monorepo, with support for version constraints",
+  "main": "src/index.js",
+  "author": "Romain Vermeulen",
+  "license": "MIT",
+  "homepage": "https://github.com/romainv/multi-updates",
+  "bugs": {
+    "url": "https://github.com/romainv/multi-updates/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/romainv/multi-updates.git"
+  },
+  "keywords": [
+    "npm",
+    "updates",
+    "upgrades",
+    "dependencies",
+    "packages",
+    "package.json",
+    "version",
+    "management",
+    "monorepo",
+    "multi",
+    "multiple",
+    "constraints",
+    "check",
+    "checker"
+  ],
+  "bin": {
+    "multi-updates": "multi-updates"
+  },
+  "scripts": {
+    "test": "jest",
+    "lint": "eslint --cache --fix && prettier --write"
+  },
+  "dependencies": {
+    "ansi-colors": "^4.1.1",
+    "enquirer": "^2.3.6",
+    "glob": "^7.1.7",
+    "updates": "^12.1.0",
+    "yargs": "^17.0.1"
+  },
+  "devDependencies": {
+    "eslint": "^7.27.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "jest": "^27.0.4",
+    "prettier": "^2.3.0"
+  },
+  "prettier": {
+    "semi": false
+  },
+  "eslintConfig": {
+    "rules": {
+      "strict": 0,
+      "prettier/prettier": "warn"
+    },
+    "env": {
+      "node": true,
+      "es2017": true,
+      "browser": true,
+      "jest": true
+    },
+    "extends": [
+      "eslint:recommended",
+      "plugin:node/recommended",
+      "prettier"
+    ],
+    "parserOptions": {
+      "ecmaVersion": 2018,
+      "ecmaFeatures": {
+        "jsx": true
+      }
+    },
+    "plugins": [
+      "prettier"
+    ]
+  },
+  "engines": {
+    "node": ">=12.20.0"
+  }
+}
