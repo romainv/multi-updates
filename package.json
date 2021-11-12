@@ -1,6 +1,6 @@
 {
   "name": "multi-updates",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "Update npm dependencies across all packages in a monorepo, with support for version constraints",
   "main": "src/index.js",
   "author": "Romain Vermeulen",
@@ -30,25 +30,28 @@
     "checker"
   ],
   "bin": {
-    "multi-updates": "multi-updates"
+    "multi-updates": "multi-updates.js"
   },
   "scripts": {
-    "lint": "eslint --cache --fix && prettier --write"
+    "lint": "eslint --cache --fix $(git ls-files '*.js') && prettier --write $(git ls-files '*.js')"
   },
+  "type": "module",
+  "exports": "./src/index.js",
   "dependencies": {
     "ansi-colors": "^4.1.1",
     "enquirer": "^2.3.6",
-    "find-up": "^5.0.0",
-    "glob": "^7.1.7",
-    "updates": "^12.1.0",
-    "yargs": "^17.0.1"
+    "find-up": "^6.2.0",
+    "glob": "^7.2.0",
+    "updates": "^12.2.2",
+    "yargs": "^17.2.1"
   },
   "devDependencies": {
-    "eslint": "^7.27.0",
+    "eslint": "^8.2.0",
     "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.25.3",
     "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-prettier": "^3.4.0",
-    "prettier": "^2.3.0"
+    "eslint-plugin-prettier": "^4.0.0",
+    "prettier": "^2.4.1"
   },
   "prettier": {
     "semi": false
@@ -60,16 +63,18 @@
     },
     "env": {
       "node": true,
-      "es2017": true,
-      "browser": true
+      "es6": true,
+      "es2020": true
     },
     "extends": [
       "eslint:recommended",
+      "plugin:import/recommended",
       "plugin:node/recommended",
       "prettier"
     ],
     "parserOptions": {
-      "ecmaVersion": 2018,
+      "ecmaVersion": 2020,
+      "sourceType": "module",
       "ecmaFeatures": {
         "jsx": true
       }
@@ -79,6 +84,6 @@
     ]
   },
   "engines": {
-    "node": ">=12.20.0"
+    "node": "^12.20.0 || ^14.13.1 || >=16.0.0"
   }
 }

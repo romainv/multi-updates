@@ -1,4 +1,4 @@
-const execUpdates = require("./execUpdates")
+import execUpdates from "./execUpdates.js"
 
 /**
  * Retrieve a de-duplicated list of dependencies across all packages
@@ -12,7 +12,7 @@ const execUpdates = require("./execUpdates")
  * @return {Object} An map of dependencies names with available update and
  * old/new versions as well as whether version is constrained
  */
-module.exports = async function getUpdates({
+export default async function getUpdates({
   packages,
   exclude = [],
   include = [],

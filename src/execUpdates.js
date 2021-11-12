@@ -1,10 +1,17 @@
-const { join, dirname } = require("path")
-const { exec } = require("child_process")
-const hasDependency = require("./hasDependency")
+import { join, dirname } from "path"
+import { exec } from "child_process"
+import hasDependency from "./hasDependency.js"
+import { createRequire } from "module"
+const require = createRequire(import.meta.url)
 // Location of the updates binary. We won't be able to use 'npx updates' as
 // we'll run this in various packages which may not have this dependency
 const updatesPkg = require.resolve("updates/package.json")
-const updatesBin = join(dirname(updatesPkg), require(updatesPkg).bin)
+const updatesBin = join(
+  dirname(updatesPkg),
+  typeof require(updatesPkg).bin === "string"
+    ? require(updatesPkg).bin
+    : require(updatesPkg).bin.updates
+)
 
 /**
  * Execute the updates command in the supplied directory and return the
@@ -21,7 +28,7 @@ const updatesBin = join(dirname(updatesPkg), require(updatesPkg).bin)
  * @return {Object} An map of dependencies names with available update and
  * old/new versions
  */
-module.exports = async function execUpdates({
+export default async function execUpdates({
   dir,
   update = false,
   exclude: excludeArg = [],

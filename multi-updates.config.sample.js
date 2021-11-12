@@ -6,12 +6,16 @@
 // 	- we set constraints on react-scripts dependencies, as it would otherwise
 // 		complain if it found different versions in the monorepo's root
 
-// eslint-disable-next-line node/no-missing-require
-const { packages } = require("./lerna.json") // Source of truth
-const { join } = require("path")
-const { existsSync, lstatSync } = require("fs")
-const glob = require("glob")
-const { execSync } = require("child_process")
+// eslint-disable-next-line node/no-missing-import, import/no-unresolved
+import { packages } from "./lerna.json" // Source of truth
+import { dirname, join } from "path"
+import { existsSync, lstatSync } from "fs"
+import glob from "glob"
+import { execSync } from "child_process"
+import { fileURLToPath } from "url"
+import { createRequire } from "module"
+const __dirname = dirname(fileURLToPath(import.meta.url))
+const require = createRequire(import.meta.url)
 
 // Retrieve dependency versions constrained by react-scripts
 const constrained = JSON.parse(
@@ -23,7 +27,7 @@ const constrained = JSON.parse(
 )
 
 // Export configuration
-module.exports = {
+export default {
   // Include monorepo's root and packages configured in lerna
   packages: ["./"].concat(packages),
   // Ignore local packages that depend on each other

@@ -1,4 +1,6 @@
-const { join } = require("path")
+import { join } from "path"
+import { createRequire } from "module"
+const require = createRequire(import.meta.url)
 
 /**
  * Indicate whether a dependency is in a package
@@ -6,7 +8,7 @@ const { join } = require("path")
  * @param {String} dep The dependency
  * @return {Boolean} Whether the package has the supplied dependency
  */
-module.exports = function hasDependency(pkgDir, dep) {
+export default function hasDependency(pkgDir, dep) {
   // Retrieve all dependencies of all types from package
   const { dependencies, devDependencies, peerDependencies } = require(join(
     pkgDir,

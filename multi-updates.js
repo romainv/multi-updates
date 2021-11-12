@@ -1,9 +1,10 @@
 #!/usr/bin/env node
 
-const findUp = require("find-up")
-const { join } = require("path")
-const Module = require("module")
-const update = require("./src")
+import { findUpSync, pathExistsSync } from "find-up"
+import { join } from "path"
+import Module, { createRequire } from "module"
+import update from "./src/index.js"
+const require = createRequire(import.meta.url)
 
 // Capture process arguments
 const cliArgs = process.argv.slice(2)
@@ -23,15 +24,15 @@ const userConfPath = cliArgs.includes("--config")
     require.resolve(cliArgs[cliArgs.indexOf("--config") + 1], {
       paths: Module._nodeModulePaths(process.cwd()).concat([process.cwd()]),
     })
-  : findUp.sync((dir) =>
-      findUp.sync.exists(join(dir, "multi-updates.config.js"))
+  : findUpSync((dir) =>
+      pathExistsSync(join(dir, "multi-updates.config.js"))
         ? // First multi-updates.config.js if found
           join(dir, "multi-updates.config.js")
-        : findUp.sync.exists(join(dir, "multi-updates.config.json"))
+        : pathExistsSync(join(dir, "multi-updates.config.json"))
         ? // First multi-updates.config.json if found
           join(dir, "multi-updates.config.json")
         : // First package.json file with a 'multiUpdates' entry, if found
-        findUp.sync.exists(join(dir, "package.json")) &&
+        pathExistsSync(join(dir, "package.json")) &&
           require(join(dir, "package.json")).multiUpdates
         ? join(dir, "package.json")
         : // Continue the search upward otherwise

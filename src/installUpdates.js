@@ -1,6 +1,6 @@
-const execUpdates = require("./execUpdates")
-const hasDependency = require("./hasDependency")
-const { exec } = require("child_process")
+import execUpdates from "./execUpdates.js"
+import hasDependency from "./hasDependency.js"
+import { exec } from "child_process"
 
 /**
  * Install the selected updates
@@ -10,7 +10,7 @@ const { exec } = require("child_process")
  * indicated whether the update is contrained and if so, the version to set
  * @return {Array<String>} The name of the dependencies that were updated
  */
-module.exports = async function installUpdates({ packages, dependencies }) {
+export default async function installUpdates({ packages, dependencies }) {
   // List if constrained dependencies
   const constrained = Object.entries(dependencies).reduce(
     (constrained, [dep, { isConstrained }]) => {

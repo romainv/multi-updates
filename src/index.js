@@ -1,10 +1,10 @@
-const colors = require("ansi-colors") // Dependency of enquirer
-const getUpdates = require("./getUpdates")
-const selectUpdates = require("./selectUpdates")
-const installUpdates = require("./installUpdates")
-const glob = require("glob")
-const { join } = require("path")
-const { existsSync, lstatSync } = require("fs")
+import colors from "ansi-colors" // Dependency of enquirer
+import getUpdates from "./getUpdates.js"
+import selectUpdates from "./selectUpdates.js"
+import installUpdates from "./installUpdates.js"
+import glob from "glob"
+import { join } from "path"
+import { existsSync, lstatSync } from "fs"
 
 /**
  * Update dependencies across multiple packages, satisfying constraints
@@ -18,7 +18,7 @@ const { existsSync, lstatSync } = require("fs")
  * @param {String} [params.cwd] Path to the directory from which to resolve
  * packages path
  */
-module.exports = async function update({
+export default async function update({
   packages = ["./"],
   exclude = [],
   include = [],

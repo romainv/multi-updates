@@ -1,5 +1,5 @@
-const colors = require("ansi-colors")
-const { prompt } = require("enquirer")
+import colors from "ansi-colors"
+import Enquirer from "enquirer"
 
 /**
  * Interactive command prompt asking user to select dependencies to update
@@ -9,7 +9,7 @@ const { prompt } = require("enquirer")
  * @return {Object} A filtered copy of the provided object, with only the
  * selected updates
  */
-module.exports = async function selectUpdates(available) {
+export default async function selectUpdates(available) {
   // Print formatted output
   const widths = [
     // Column widths defined by the max length of their respective contents
@@ -30,7 +30,7 @@ module.exports = async function selectUpdates(available) {
       )
     )
   )
-  const { selected } = await prompt({
+  const { selected } = await Enquirer.prompt({
     type: "multiselect",
     name: "selected",
     message: `${
