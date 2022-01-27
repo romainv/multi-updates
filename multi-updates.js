@@ -63,7 +63,6 @@ async function getUserConf(cliArgs) {
   const userConf = await getUserConf(cliArgs)
   yargs(hideBin(process.argv))
     .config(userConf) // Provide user conf from the default location
-    .config() // Load other config file if provide with --config
     .command("$0", "Update dependencies in all packages", {}, (args) =>
       update(args)
     ).argv

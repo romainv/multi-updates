@@ -1,6 +1,6 @@
 {
   "name": "multi-updates",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Update npm dependencies across all packages in a monorepo, with support for version constraints",
   "main": "src/index.js",
   "author": "Romain Vermeulen",
