@@ -6,7 +6,7 @@
 // 	- we set constraints on react-scripts dependencies, as it would otherwise
 // 		complain if it found different versions in the monorepo's root
 
-// eslint-disable-next-line node/no-missing-import, import/no-unresolved
+// eslint-disable-next-line import/no-unresolved
 import { packages } from "./lerna.json" // Source of truth
 import { dirname, join } from "path"
 import { existsSync, lstatSync } from "fs"

@@ -1,6 +1,6 @@
 {
   "name": "multi-updates",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Update npm dependencies across all packages in a monorepo, with support for version constraints",
   "main": "src/index.js",
   "author": "Romain Vermeulen",
@@ -42,48 +42,21 @@
     "enquirer": "^2.3.6",
     "find-up": "^6.2.0",
     "glob": "^7.2.0",
-    "updates": "^12.2.2",
-    "yargs": "^17.2.1"
+    "updates": "^13.0.0",
+    "yargs": "^17.3.1"
   },
   "devDependencies": {
-    "eslint": "^8.2.0",
+    "eslint": "^8.7.0",
     "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^4.0.0",
-    "prettier": "^2.4.1"
+    "prettier": "^2.5.1"
   },
   "prettier": {
     "semi": false
   },
-  "eslintConfig": {
-    "rules": {
-      "strict": 0,
-      "prettier/prettier": "warn"
-    },
-    "env": {
-      "node": true,
-      "es6": true,
-      "es2020": true
-    },
-    "extends": [
-      "eslint:recommended",
-      "plugin:import/recommended",
-      "plugin:node/recommended",
-      "prettier"
-    ],
-    "parserOptions": {
-      "ecmaVersion": 2020,
-      "sourceType": "module",
-      "ecmaFeatures": {
-        "jsx": true
-      }
-    },
-    "plugins": [
-      "prettier"
-    ]
-  },
   "engines": {
-    "node": "^12.20.0 || ^14.13.1 || >=16.0.0"
+    "node": ">=14.13.1 || >=16.0.0"
   }
 }
