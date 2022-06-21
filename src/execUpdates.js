@@ -66,8 +66,12 @@ export default async function execUpdates({
       )
     })
     if (error) {
-      if (error.startsWith("Error: No packages match the given filters"))
-        // Happens when all package dependencies have been excluded
+      if (
+        error.startsWith("Error: No packages match the given filters") ||
+        error.startsWith("Error: No packages found")
+      )
+        // Happens when all package dependencies have been excluded, or a
+        // package has no dependencies
         return {}
       else throw new Error(error)
     }
